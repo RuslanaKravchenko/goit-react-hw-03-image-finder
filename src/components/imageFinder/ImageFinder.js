@@ -20,6 +20,14 @@ class ImageFinder extends Component {
   };
   componentDidMount() {
     window.addEventListener('keydown', this.closeModalByEsc);
+    const { searchQuery, page } = this.state;
+    fetchImagesWithQuery(searchQuery, page).then(response => {
+      this.setState(prevState => ({
+        ...prevState,
+        images: [...response],
+        page: 2,
+      }));
+    });
   }
 
   componentWillUnmount() {
